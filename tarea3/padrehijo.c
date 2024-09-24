@@ -18,7 +18,7 @@ int main() {
     if (pid == 0) { // Proceso hijo
         close(Fd1[0]); 
         close(Fd2[1]); 
-
+	sleep(10);
         char* lineas_hijo[] = {"Primra linea\n", "Segunda linea\n", "Tercera linea\n","CUarta linea\n", END_MESSAGE};
         
         for (int i = 0; lineas_hijo[i] != END_MESSAGE; i++) {
@@ -28,7 +28,7 @@ int main() {
         write(Fd1[1], END_MESSAGE, strlen(END_MESSAGE));
 
         close(Fd1[1]); 
-
+	
         char buffer[BUFFER_SIZE];
         read(Fd2[0], buffer, BUFFER_SIZE);
         printf("Hijo: El padre ha contado %s líneas\n", buffer);
@@ -38,11 +38,10 @@ int main() {
     else {
         close(Fd1[1]); 
         close(Fd2[0]); 
-
-        FILE* pipe_lectura = fdopen(Fd1[0], "r");
+	sleep(10);
+        FILE *pipe_lectura = fdopen(Fd1[0], "r");
         char *buffer = NULL;
         size_t len = 0;
-
         while (getline(&buffer, &len, pipe_lectura) != -1) {
             if (strncmp(buffer, END_MESSAGE, strlen(END_MESSAGE)) == 0) {
                 break;
