@@ -14,11 +14,12 @@ void die(char *s)
 
 struct msgbuf
 {
-    long    mtype;
-    char    mtext[MAXSIZE];
+	long    mtype;
+	int stype;
+	pid_t pid;
 };
 
-main()
+int main()
 {
     int msqid;
     int msgflg = IPC_CREAT | 0666;
@@ -31,52 +32,54 @@ main()
     if ((msqid = msgget(key, msgflg )) < 0)   //Get the message queue ID for the given key
 	die("msgget");
 
-    //Message Type
-    sbuf.mtype = 1;
-
-    printf("Menu: ");
+    int var, PID;
+    while(var != 5){
+	printf("Menu: \n");
     printf("1: signal 2 \n");
     printf("2: signal 9 \n");
     printf("3: signal 18 \n");
     printf("4: signal 19 \n");
+    printf("5: salir \n");
     scanf("%d", &var);
-    if(var > 0 && var < 5){
-    	switch(var){
-		case 1:
-			sbuf.stype = 2;
-			sbuf.mtype = 1;
-			break;
-		case 2:
-                        sbuf.stype = 9;
-                        sbuf.mtype = 1;
-                        break;
-		case 3:
-                        sbuf.stype = 18;
-                        sbuf.mtype = 1;
-                        break;
-		case 4:
-                        sbuf.stype = 19;
-                        sbuf.mtype = 1;
-                        break;
+
+	printf("PID del proceso: ");
+        scanf("%d", &PID);
+        sbuf.pid = PID;
+    	if(var > 0 && var < 5){
+    		switch(var){
+			case 1:
+				sbuf.stype = 2;
+				sbuf.mtype = 2;
+				break;
+			case 2:
+                        	sbuf.stype = 9;
+                        	sbuf.mtype = 1;
+                        	break;
+			case 3:
+                        	sbuf.stype = 18;
+                	        sbuf.mtype = 1;
+                	        break;
+			case 4:
+                      	 	sbuf.stype = 19;
+                	        sbuf.mtype = 2;
+        	                break;
+		}
 	}
 	else{
-		printf("ERROR")
-	}
-    }
-
-    getchar();
-
-    buflen = strlen(sbuf.mtext) + 1 ;
+		printf("ERROR");
+		}
+    
+    buflen = sizeof(sbuf) - sizeof(long);
 
     if (msgsnd(msqid, &sbuf, buflen, IPC_NOWAIT) < 0)
     {
-        printf ("%d, %ld, %s, %d \n", msqid, sbuf.mtype, sbuf.mtext, (int)buflen);
+        printf ("%d, %ld, %s, %d \n", msqid, sbuf.mtype, (int)buflen);
         die("msgsnd");
     }
 
     else
         printf("Message Sent\n");
-
+	}
     exit(0);
 }
          
