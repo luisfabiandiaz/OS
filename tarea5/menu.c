@@ -49,7 +49,7 @@ int main()
     		switch(var){
 			case 1:
 				sbuf.stype = 2;
-				sbuf.mtype = 2;
+				sbuf.mtype = 1;
 				break;
 			case 2:
                         	sbuf.stype = 9;
@@ -57,7 +57,7 @@ int main()
                         	break;
 			case 3:
                         	sbuf.stype = 18;
-                	        sbuf.mtype = 1;
+                	        sbuf.mtype = 2;
                 	        break;
 			case 4:
                       	 	sbuf.stype = 19;

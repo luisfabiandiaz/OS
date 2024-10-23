@@ -6,7 +6,10 @@ void sighandler(int);
 
 int main () {
    signal(SIGINT, sighandler);
-
+   signal(SIGKILL, sighandler);
+   signal(SIGTERM, sighandler);
+   signal(SIGCONT, sighandler);
+   signal(SIGSTOP, sighandler); 
    while(1) {
 	pid_t my_pid = getpid();
       printf("soy %d\n", my_pid); 	
