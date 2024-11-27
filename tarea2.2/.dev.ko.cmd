@@ -1,0 +1,1 @@
+savedcmd_/home/luis-fabian/Documentos/OS/tarea2.2/dev.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/luis-fabian/Documentos/OS/tarea2.2/dev.ko /home/luis-fabian/Documentos/OS/tarea2.2/dev.o /home/luis-fabian/Documentos/OS/tarea2.2/dev.mod.o

@@ -1,0 +1,1 @@
+savedcmd_/home/luis-fabian/Documentos/OS/tarea2.2/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/luis-fabian/Documentos/OS/tarea2.2/Module.symvers -T /home/luis-fabian/Documentos/OS/tarea2.2/modules.order -i Module.symvers -e 

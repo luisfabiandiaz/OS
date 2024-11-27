@@ -1,0 +1,1 @@
+savedcmd_/home/luis-fabian/Documentos/OS/tarea2.2/dev.mod := printf '%s\n'   dev.o | awk '!x[$$0]++ { print("/home/luis-fabian/Documentos/OS/tarea2.2/"$$0) }' > /home/luis-fabian/Documentos/OS/tarea2.2/dev.mod
